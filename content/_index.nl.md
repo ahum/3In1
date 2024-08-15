@@ -24,14 +24,15 @@ sections:
 
 
     songs: 
-      - title: Close enough for love 
-        url: /mp3/close-enough-for-love.mp3
-      - title: Emily (for Emily Daly) 
-        url: /mp3/emily.mp3
-      - title: Everyth'ng I love 
-        url: /mp3/everything-i-love.mp3 
       - title: Lullaby in rhythm 
         url: /mp3/lullaby-in-rhythm.mp3 
+      - title: Emily (for Emily Daly) 
+        url: /mp3/emily.mp3
+      - title: Ev'rything I love 
+        url: /mp3/everything-i-love.mp3 
+      - title: Close enough for love 
+        url: /mp3/close-enough-for-love.mp3
+
 
     video: /video/3InOne-Hotel-Indigo.mp4
 
@@ -80,7 +81,6 @@ sections:
   - name: contact
     title: Contact
     text: "Voor boekingen en vragen omtrent 3 in 1<br> kunt u met ons contact opnemen via:"
-    number: +31 6 11 49 81 88
     email: contact@3-in-1.org
   - name: press-kit
     title: Presskit

@@ -24,14 +24,14 @@ sections:
   - name: media 
     title: Media
     songs: 
-      - title: Close enough for love 
-        url: /mp3/close-enough-for-love.mp3
-      - title: Emily (for Emily Daly) 
-        url: /mp3/emily.mp3
-      - title: Everyth'ng I love 
-        url: /mp3/everything-i-love.mp3 
       - title: Lullaby in rhythm 
         url: /mp3/lullaby-in-rhythm.mp3 
+      - title: Emily (for Emily Daly) 
+        url: /mp3/emily.mp3
+      - title: Ev'rything I love 
+        url: /mp3/everything-i-love.mp3 
+      - title: Close enough for love 
+        url: /mp3/close-enough-for-love.mp3
     video: /video/3InOne-Hotel-Indigo.mp4
     photos:
       - asset: images/one.jpg
@@ -75,7 +75,6 @@ sections:
   - name: contact
     title: Contact
     text: "For bookings or any other inquiries related to 3 in 1<br> you can reach us at:"
-    number: +31 6 11 49 81 88
     email: contact@3-in-1.org
   - name: press-kit
     title: Press Kit
