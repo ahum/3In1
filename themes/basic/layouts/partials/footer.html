@@ -1,0 +1,13 @@
+<div class="footer">
+  <div class="centered">
+
+    {{ $logo := resources.Get .Params.image  }}
+    {{ $thumb := $logo.Process "resize x100" }}
+
+    <img class="footer-logo" src="{{ $thumb.RelPermalink }}" />
+    <span>{{ .Site.Data.vars.number }}</span>
+    <a href="mailto:{{ .Site.Data.vars.mailTo }}" class="footer-link">
+      {{ .Site.Data.vars.mailTo }}
+    </a>
+  </div>
+</div>

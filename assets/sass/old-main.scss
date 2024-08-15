@@ -1,0 +1,377 @@
+@import "node_modules/photoswipe/src/photoswipe";
+
+html{
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+}
+
+
+
+.thumb {
+  width: 100%;
+}
+.section{
+  padding-bottom: 40px;
+}
+
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 400;
+  font-size: 1.2em;
+  --text-color: rgb(255, 183, 183);
+  --secondary-text-color: #960411;
+  --mdc-theme-primary: var(--text-color);
+  --mdc-text-field-outlined-idle-border-color: var(--text-color);
+  --mdc-text-field-ink-color: var(--text-color);
+  --mdc-button-outline-color: var(--text-color);
+  --mdc-text-field-outlined-hover-border-color: white;
+  scroll-behavior: smooth;
+
+  * {
+    --secondary-text-color: #960411;
+    color: var(--text-color);
+    line-height: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+.section-header {
+  padding-top: 0px;
+  font-size: 1.9rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--text-color, rgb(255, 183, 183));
+}
+
+mwc-textfield{
+  width: 100%;
+  padding-top: 20px;
+  max-width: 300px;
+}
+form{
+  padding-bottom: 30px;
+}
+
+.content{
+  position: relative;
+  padding-top: 0px;
+}
+
+.centered{
+  position: relative;
+  min-width: 1000px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+ .inner-content{
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,1) 10vmax);
+  // top: -0;
+  padding: 20px;
+  box-sizing: border-box;
+  // border: solid 1px purple;
+ }
+
+
+h1 {
+  font-weight: 400;
+}
+
+.footer {
+  bottom: 0;
+  background-color: var(--text-color);
+  padding: 0;
+  margin: 0;
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  .centered {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  a, span {
+    color: black;
+  }
+}
+
+.footer-logo{
+  width: 50px;
+  padding: 8px;
+}
+
+.about {
+  width:570px;
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.8);
+}
+// .vignette-holder{
+//   height: 85vmin; //550px;
+//   // border: solid 1px green;
+// }
+
+.vignette{
+  width: 100%;
+
+  position: relative;
+  top: 0%; 
+  // border: solid 1px #993399;
+}
+.vignette-bottom{
+  width: 100%;
+  position: absolute;
+  height: 100vh;
+  top: 0%; 
+  // border: solid 1px #993399;
+}
+.logo-img {
+  width: 36%;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+lk-ticket {
+  padding: 0px;
+  width: 70%;
+  padding-bottom: 60px;
+}
+
+lk-ticket[mode="audio"] {
+  position: relative;
+  left: 0px;
+  right: 0;
+}
+// @medikia only screen and (orientation: landscape), only screen and (max-width: 700px) {
+//   .inner-content{
+//     top: -50vw;
+//    }
+// } 
+
+@media(max-width: 768px) {
+  html{
+    font-size: 14px;
+  }
+
+
+  .inner-content{
+    // top: -55vw;
+   }
+
+  .centered{
+    width: 100%;
+    min-width: inherit;
+    max-width: inherit;
+  }
+
+
+  lk-ticket {
+    // width: 350px;
+    min-width: 300px;
+    margin: 0 auto;
+    // padding: 16px;
+
+  }
+
+  lk-ticket[double] {
+    position: relative;
+    left: 20px;
+    right: 0;
+  }
+
+  .double {
+    position: relative;
+    right: 0;
+    float: inherit;
+  }
+
+  .bg-holder{
+    background-size: 100%;
+    background-position: 50% 0%;
+  }
+
+  .logo-holder{
+    right: 8px;
+    img{
+      max-width: 40%; //fit-content;
+    }
+  }
+  .footer{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    .centered {
+      justify-content: space-evenly;
+
+      //padding-right: 8px;
+      * {
+        font-size: 14px;
+        
+      }
+    }
+  }
+  .content{
+    width: 100%;
+    min-width: inherit;
+    max-width: inherit;
+
+    .inner-content{
+      padding: 8px;
+    }
+  }
+  .spacer{
+    height: 300px;
+  }
+   .about{
+     width: 100%;
+  //   box-sizing: border-box;
+   }
+
+.nav-menu{
+  display: none;
+}
+}
+@media(max-width: 350px){
+  .footer{
+    .centered {
+      flex-direction: column;
+    }
+  }
+}
+// .material-icons{
+
+// font-size: 36px;  /* Preferred icon size */
+// }
+// .gallery {
+//   height: 50px;
+// }
+// lk-ticket {
+//   padding: 0px;
+//   width: 70%;
+//   padding-bottom: 60px;
+// }
+// lk-ticket[double] {
+//   position: relative;
+//   left: 80px;
+//   right: 0;
+// }
+// html{
+//   scroll-behavior: smooth;
+//   -webkit-font-smoothing: antialiased;
+// }
+// .content{
+//   scroll-behavior: smooth;
+// }
+
+// .inner-content{
+//   padding: 20px;
+// }
+
+// nav{
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// a {
+//   color: var(--text-color);
+// }
+
+// nav{
+//   position: relative;
+// }
+// .footer {
+//   background-color: var(--text-color);
+//   padding: 0;
+//   margin: 0;
+//   * {
+//     padding: 0;
+//     margin: 0;
+//   }
+//   .centered {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+
+//   }
+//   a, span {
+//     color: black;
+//   }
+// }
+// .nav-right {
+//   li {
+//     padding-right: 0;
+//     padding-left: 40px;
+//   }
+// }
+// .footer-logo{
+//   width: 50px;
+//   padding: 8px;
+// }
+
+// .about {
+//   width:570px;
+//   text-shadow: 2px 2px 1px rgba(0,0,0,0.8);
+// }
+
+// .spacer{
+//   width: 100%;
+//   height: 500px;
+// }
+
+// .logo-holder{
+//   // width: 300px;
+//   position: relative;
+//   right: 54px;
+//   top: 0px;
+//   img{
+//     position: absolute;
+//     right: 0px;
+//     max-width: 30%; //fit-content;
+//   }
+// }
+
+// .stream-link {
+//   display: block;
+//   font-size: 1.1rem;
+//   font-weight: 400;
+//   line-height: 2rem;;
+// }
+
+// p {
+//   font-size: 1.1rem;
+//   color: var(--text-color, rgb(255, 183, 183));
+//   line-height: 1.8;
+//   font-weight: 400;
+// }
+
+// .bg-holder {
+//   background-image: url(/img/lk-min.png); //https://thelipstickkillers.com/wp-content/uploads/2022/04/TLK-band-photo_vignette_FINAL-WIREFRAME-25-feb.png);
+//   background-size:65% ;                      /* <------ */
+//   background-repeat:   no-repeat;
+//   background-position:50% 20%;     
+//   background-origin:content-box;   
+//   position: absolute;
+//   z-index: -1;
+//   width: 100%;
+//   height: 100vh;
+// }
+// .content {
+//   min-width: 1000px;
+//   max-width: 1000px;
+//   border: solid 0px white;
+// }
+
+@media (orientation: landscape) and (max-width: 900px) {
+  .inner-content {
+    border: solid 0px red;
+    // top: -48vw;
+  }
+
+}

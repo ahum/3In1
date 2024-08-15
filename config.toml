@@ -1,0 +1,19 @@
+baseURL = 'https://thelipstickkillers.com/'
+# baseURL = 'https://lipstick-killers-dev.web.app/'
+languageCode = 'en-us'
+title = 'The Lipstick Killers'
+theme = 'basic'
+enableRobotsTXT = true
+
+defaultContentLanguage = 'en'
+[languages] 
+  [languages.en]
+    title = ""
+    weight = 1
+    languageName = "en"
+
+  [languages.nl]
+    title = ""
+    weight = 2
+    languageName = "nl"
+

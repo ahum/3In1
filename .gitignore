@@ -1,0 +1,9 @@
+resources/_gen
+node_modules
+.DS_Store
+.vercel
+public
+.firebase
+.vscode
+dls
+*.zip

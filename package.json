@@ -1,0 +1,14 @@
+{
+  "name": "lipstick-killers",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@material/mwc-textfield": "^0.27.0",
+    "@material/mwc-button": "^0.27.0",
+    "@material/textfield": "^14.0.0",
+    "lit": "^3.2.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-go-template": "^0.0.15",
+    "photoswipe": "^5.4.4"
+  }
+}

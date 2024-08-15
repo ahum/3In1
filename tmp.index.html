@@ -1,0 +1,169 @@
+{{ define "head" }}
+  <title>{{ .Params.title }}</title>
+  {{ $s := slice (dict "null" "null") }}
+  {{/*  {{ $sections := (slice
+    (dict "name" "about" "title" .Params.about.title)
+    (dict "name" "media" "title" .Params.media.title)
+    (dict "name" "streaming" "title" .Params.streaming.title)
+    (dict "name" "contact" "title" .Params.contact.title)
+    )
+  }}  */}}
+  {{ range $.Site.Home.AllTranslations }}
+    {{ $s = $s |
+      append (dict "name" .Language.LanguageName "link" .RelPermalink)
+    }}
+  {{ end }}
+  {{ $t
+    := last (sub (len $s) 1) $s
+  }}
+  {{ $js := resources.Get "js/index.ts" | js.Build
+    (dict "params" (dict "langs" $t))
+  }}
+
+  <script type="text/javascript">
+    window.sections = JSON.parse({{ .Params.sections | jsonify }})
+  </script>
+  <script src="{{ $js.RelPermalink }}"></script>
+{{ end }}
+{{ define "about" }}<h1>about </h1>{{ end }}
+
+{{ define "partials/about.html" }}
+  <div class={{.name}} id={{.name}}>
+      <h1 class="section-header">{{ .title }}</h1>
+      <div>{{ .one }}</div>
+      <div>{{ .two }}</div>
+  </div>
+{{ end }}
+{{ define "partials/media.html" }}
+  <div class={{.name}} id={{.name}}>
+      <h1 class="section-header">{{ .title }}</h1>
+      <lk-ticket mode="video" coming-soon>
+        <video src={{.video}} controls="true"></video>
+      </lk-ticket>
+      <lk-ticket mode="audio">
+        <lk-player></lk-player>
+        <script type="text/javascript">
+          document.addEventListener('DOMContentLoaded', () => {
+            const p = document.querySelector('lk-player');
+            
+            console.log('p?', p);
+            p.songs = JSON.parse({{ jsonify .songs  }} )
+            p.requestUpdate()
+          })
+        </script>
+          {{/*  {{ $lastSong := index .songs (sub (len .songs)  1 )}}
+          {{ range $m :=  .songs  }}
+            {{$isLast := eq $lastSong.title .title }}
+            <lk-track title={{.title}} url={{.url}} is-last={{$isLast}}></lk-track>
+          {{ end }}
+        </lk-player>  */}}
+      </lk-ticket>
+      <lk-ticket mode="photos" coming-soon>
+            <div class="gallery pswp-gallery--single-column" id="gallery--getting-started">
+        {{ range $p := .photos }}
+          <a href={{.url}}
+            data-pswp-width={{.w}}
+            data-pswp-height={{.h}}
+            data-cropped="true"
+            target="_blank">
+              {{ with $p.thumb }}
+              <img class="thumb" src={{.}} /> 
+              {{end}}
+                </a>
+        {{end }}
+        </div>
+      </lk-ticket>
+  </div>
+{{ end }}
+
+{{ define "partials/streaming.html"}}
+  <div class={{.name}} id={{.name}}>
+          <h1 class="section-header">{{ .title }}</h1>
+          <p>{{ .text | safeHTML }}</p>
+          {{ range $l := .links }}
+            <a
+              class="stream-link"
+              href="{{ $l.url }}"
+              target="_blank"
+              rel="noopener"
+              >{{ $l.title }}</a
+            >
+          {{ end }}
+  </div>  
+{{end}}
+{{ define "partials/press-kit.html" }}
+  <div class={{.name}} id={{.name}}>
+    <h1 class="section-header">{{ .title }}</h1>
+    <a download="{{.filename}}" href="{{.url}}">{{.text}}</a>
+  </div>
+{{end}}
+{{ define "partials/mailing-list.html" }}
+  <div class={{.name}} id={{.name}}>
+    <h1 class="section-header">{{ .title }}</h1>
+    <p>{{.text}} </p>
+    <form action="https://thelipstickkillers.us17.list-manage.com/subscribe/post?u=81cfb22b4ca5a3a253c827ffd&amp;id=6d5ffc9c24" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <mwc-textfield outlined required  name="EMAIL" id="mce-EMAIL"></mwc-textfield>
+      <div hidden="true"><input type="hidden" name="tags" value="6343168"></div>
+      <br/>
+      <br/>
+      <mwc-button outlined label="Join"></mwc-button>
+    </form>
+  </div>
+{{end}}
+
+
+{{ define "partials/contact.html"}}
+  <div class={{.name}} id={{.name}}>
+          <h1 class="section-header">{{ .title }}</h1>
+          <p>{{ .text }}</p>
+          <p>
+            {{ .number }}
+            <br />
+            <a href="mailto:{{ .email }}"
+              >{{ .email }}</a
+            >
+          </p>
+   </div>  
+{{end}}
+
+{{ define "main" }}
+          {{range $v := .Params.sections }}
+            {{$path := $v.name | printf "%s.html"}}
+            <div class="section">
+              {{ partial $path .}}
+            </div>
+          {{ end }}
+  <div class="centered">
+
+    {{/*  <main-menu links="about,media,streaming,contact"> </main-menu>    */}}
+    <div class="content">
+        <div class="v-l">
+
+        {{/*  <img class="vignette" src="/img/vignette-0.jpg">  */}}
+        {{/*  <img
+            class="logo-img"
+
+            src="/img/logo.png"
+            title="LOGO + DROPSHADOW"
+            alt="LOGO + DROPSHADOW"
+            />  */}}
+        </div>
+
+      <div class="inner-content">
+        {{/*  <img class="vignette-bottom" src="/img/vignette-1.jpg">  */}}
+
+        <div class="section-holder">
+
+          {{/*  {{range $v := .Params.sections }}
+            {{$path := $v.name | printf "%s.html"}}
+            <div class="section">
+              {{ partial $path .}}
+            </div>
+          {{ end }}  */}}
+        </div>
+        
+      </div>
+    </div>  
+    </div>
+  </div>
+{{ end }}

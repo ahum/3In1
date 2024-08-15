@@ -1,0 +1,197 @@
+{{ define "head" }}
+  <title>{{ .Params.title }}</title>
+  {{ $s := slice (dict "null" "null") }}
+  {{/*  {{ $sections := (slice
+    (dict "name" "about" "title" .Params.about.title)
+    (dict "name" "media" "title" .Params.media.title)
+    (dict "name" "streaming" "title" .Params.streaming.title)
+    (dict "name" "contact" "title" .Params.contact.title)
+    )
+  }}  */}}
+  {{ range $.Site.Home.AllTranslations }}
+    {{ $s = $s |
+      append (dict "name" .Language.LanguageName "link" .RelPermalink)
+    }}
+  {{ end }}
+  {{ $t
+    := last (sub (len $s) 1) $s
+  }}
+  {{ $js := resources.Get "js/index.ts" | js.Build
+    (dict "params" (dict "langs" $t))
+  }}
+
+  <script type="text/javascript">
+    window.sections = JSON.parse({{ .Params.sections | jsonify }})
+  </script>
+  <script src="{{ $js.RelPermalink }}"></script>
+{{ end }}
+{{ define "about" }}<h1>about </h1>{{ end }}
+
+{{ define "partials/about.html" }}
+  <div class={{.name}} id={{.name}}>
+      <h1 class="section-header">{{ .title }}</h1>
+      <p>{{ .one }}</p>
+      <p>{{ .two }}</p>
+      <!-- <p>{{ .memberLine }}
+        <ul>
+          {{ range $m := .members }}
+            <li>{{ $m.name }} {{ $m.instrument }}</li>
+          {{ end }}
+          </ul>
+      </p> -->
+  </div>
+{{ end }}
+{{ define "partials/media.html" }}
+  <div class={{.name}} id={{.name}}>
+      <h1 class="section-header">{{ .title }}</h1>
+      <lk-ticket mode="video">
+        <video src={{.video}} controls="true"></video>
+      </lk-ticket>
+      <lk-ticket mode="audio">
+        <lk-player></lk-player>
+        <script type="text/javascript">
+          document.addEventListener('DOMContentLoaded', () => {
+            const p = document.querySelector('lk-player');
+            
+            p.songs = JSON.parse({{ jsonify .songs  }} )
+            p.requestUpdate()
+          })
+        </script>
+          {{/*  {{ $lastSong := index .songs (sub (len .songs)  1 )}}
+          {{ range $m :=  .songs  }}
+            {{$isLast := eq $lastSong.title .title }}
+            <lk-track title={{.title}} url={{.url}} is-last={{$isLast}}></lk-track>
+          {{ end }}
+        </lk-player>  */}}
+      </lk-ticket>
+      <lk-ticket mode="photos">
+        <div class="gallery pswp-gallery--single-column" id="gallery--getting-started">
+        {{ range $p := .photos }}
+          {{ $image := resources.Get $p.asset }}
+          {{ $thumb := $image.Process "resize 500x" }}
+          <a href={{$image.RelPermalink}}
+            data-pswp-width={{$image.Width}}
+            data-pswp-height={{$image.Height}}
+            data-cropped="true"
+            target="_blank">
+              <img class="thumb" src={{$thumb.RelPermalink}} /> 
+          </a>
+        {{ end }}
+        </div>
+      </lk-ticket>
+  </div>
+{{ end }}
+
+
+{{ define "partials/social-media.html"}}
+  <div class={{.name}} id={{.name}}>
+      <h1 class="section-header">{{ .title }}</h1>
+      <p>{{ .text }}</p>
+          {{ range $l := .links }}
+
+            <a
+              class="stream-link"
+              href="{{ $l.url }}"
+              target="_blank"
+              title="{{$l.title}}"
+              alt="{{$l.title}}"
+              rel="noopener"
+              >
+              <i class="fa-brands fa-{{lower $l.title}}"></i>
+              </a>
+          {{ end }}
+  </div>
+{{ end }}
+
+{{ define "partials/streaming.html"}}
+  <div class={{.name}} id={{.name}}>
+          <h1 class="section-header">{{ .title }}</h1>
+          <p>{{ .text | safeHTML }}</p>
+          <div class="stream-links">
+
+          {{ range $l := .links }}
+
+            <a
+              class="stream-link"
+              href="{{ $l.url }}"
+              target="_blank"
+              title="{{$l.title}}"
+              alt="{{$l.title}}"
+              rel="noopener"
+              >
+              <i class="fa-brands fa-{{lower $l.title}}"></i>
+              </a>
+          {{ end }}
+          </div>
+  </div>  
+{{end}}
+{{ define "partials/press-kit.html" }}
+
+  {{ $pack := resources.Get .url }}
+  <div class={{.name}} id={{.name}}>
+    <h1 class="section-header">{{ .title }}</h1>
+    <a download="{{.filename}}" href="{{$pack.RelPermalink}}">{{.text}}</a>
+  </div>
+{{end}}
+{{ define "partials/mailing-list.html" }}
+  <div class={{.name}} id={{.name}}>
+    <h1 class="section-header">{{ .title }}</h1>
+    <p>{{.text}} </p>
+    <form class="mailing-list-form" action="https://thelipstickkillers.us17.list-manage.com/subscribe/post?u=81cfb22b4ca5a3a253c827ffd&amp;id=6d5ffc9c24" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <mwc-textfield-tweak filled required  type="email" name="EMAIL" id="mce-EMAIL"></mwc-textfield-tweak>
+      <div hidden="true"><input type="hidden" name="tags" value="6343168"></div>
+      <mwc-button-tweak outlined label="Join"></mwc-button-tweak>
+    </form>
+  </div>
+{{end}}
+
+
+{{ define "partials/contact.html"}}
+  <div class={{.name}} id={{.name}}>
+          <h1 class="section-header">{{ .title }}</h1>
+          <p>{{ .text | safeHTML }}</p>
+          <p>
+            {{ .number }}
+            <br />
+            <a href="mailto:{{ .email }}"
+              >{{ .email }}</a
+            >
+          </p>
+   </div>  
+{{end}}
+
+{{ define "main" }}
+
+  {{ $logo := resources.Get .Params.image }}
+  {{ $band := resources.Get .Params.band }}
+  <div class="centered">
+
+    <main-menu links="about,media,streaming,contact"> </main-menu>  
+    <div class="content">
+        <div class="v-l">
+        <img class="vignette" width="{{$band.Width}}" src="{{ $band.RelPermalink }}">  
+          <img
+            class="logo-img"
+
+            src="{{ $logo.RelPermalink }}"
+            />
+        </div>
+
+      <div class="inner-content">
+          <!-- <img class="vignette-bottom" src="/img/vignette/slice-{{.Params.vignetteScale}}-1.jpg">   -->
+
+        <div class="section-holder">
+
+          {{range $v := .Params.sections }}
+            {{$path := $v.name | printf "%s.html"}}
+            <div class="section">
+              {{ partial $path .}}
+            </div>
+          {{ end }}
+        </div>
+        
+      </div>
+    </div>  
+    </div>
+  </div>
+{{ end }}
